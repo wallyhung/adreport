@@ -1,0 +1,83 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'war'
+apply plugin: 'application'
+
+sourceCompatibility = 1.6
+mainClassName = "com.jukuad.statistic.config.Application"
+
+jar {
+    baseName = 'adstatistic'
+    version =  '0.1.0'
+    manifest.attributes provider: 'www.dafada.com'
+}
+
+compileJava.options.encoding = 'UTF-8'
+tasks.withType(Compile) {
+    options.encoding = "UTF-8"
+}
+
+startScripts {
+    defaultJvmOpts =['-server','-Xmx1024m','-Xms1024m','-Xmn512m','-XX:PermSize=256m','-XX:MaxPermSize=512m']
+    classpath += files('src/dist/conf')
+    doLast {
+        def windowsScriptFile = file getWindowsScript()
+        def unixScriptFile    = file getUnixScript()
+        windowsScriptFile.text = windowsScriptFile.text.replace('%APP_HOME%\\lib\\conf', '%APP_HOME%\\conf')
+        unixScriptFile.text    = unixScriptFile.text.replace('$APP_HOME/lib/conf', '$APP_HOME/conf')
+    }
+}
+applicationDistribution.from("wrapper/conf") {
+    into "conf"
+}
+applicationDistribution.from("wrapper/lib") {
+    exclude "wrapper.jar"
+    into "lib"
+}
+applicationDistribution.from("wrapper/bin") {
+    into "bin"
+}
+
+applicationDistribution.from("src/main/resources") {
+    include 'qqwry.dat'
+    into "lib"
+}
+
+processResources{
+  exclude 'qqwry.dat'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies 
+{
+    compile('org.mongodb:mongo-java-driver:2.12.2',
+            'org.mongodb.morphia:morphia:0.107',
+            'mysql:mysql-connector-java:5.1.29',
+            'commons-dbcp:commons-dbcp:1.4',
+            'com.fasterxml.jackson.core:jackson-core:2.3.3',
+            'com.fasterxml.jackson.core:jackson-databind:2.3.3',
+            'org.slf4j:slf4j-api:1.7.6',
+            'org.mongodb.morphia:morphia-logging-slf4j:0.107',
+            'ch.qos.logback:logback-core:1.1.2',
+            'ch.qos.logback:logback-classic:1.1.2',
+            'quartz:quartz:1.5.2')
+    compile files('lib/ne81commons-1.0.jar')
+    compile files("wrapper/lib/wrapper.jar")
+    testCompile('junit:junit:4.11')
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}
