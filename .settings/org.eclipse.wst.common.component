@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project-modules id="moduleCoreId" project-version="2.0">
+<project-modules id="moduleCoreId" project-version="1.5.0">
 	<wb-module deploy-name="adreport">
 		<property name="context-root" value="adreport"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/resources"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
 		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/D:/.gradle/caches/modules-2/files-2.1/mysql/mysql-connector-java/5.1.29/91798a4463050f61598122fe7fdc24aa196dfc0c/mysql-connector-java-5.1.29.jar">
 			<dependency-type>uses</dependency-type>
 		</dependent-module>
