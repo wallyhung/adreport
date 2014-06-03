@@ -44,8 +44,8 @@ public class StatisticService
 		request.daleteHourData(hour);
 		
 		logger.info("{}.采集基础数据...",hour);
-		LogAnalysisService.analyzeLogThread(hour);
-		SecondLogAnalysisService.analyzeLogThread(hour);
+		LogAnalysisService.analyzeSingleLog(hour);
+		SecondLogAnalysisService.analyzeSingleLog(hour);
 //		String[] path = {"d:/bin/logs/","z:/"};
 //		ThreadPool pool = new ThreadPool(0, path, hour);
 //		pool.init();
@@ -169,6 +169,7 @@ public class StatisticService
 				validateDayStatistic(hourStr);
 				logger.info("当前进行的小时统计为：{}",hourStr);
 				//判断7点钟时候，清掉终端缓存数据，更新新的一天的缓存
+				if(hour.lastIndexOf("-00") > -1) cache.clear();
 				if(hour.lastIndexOf("-07") > -1) cache.clearCache();
 				analyzeDevice(hourStr);
 				statistic(hourStr);
@@ -194,10 +195,6 @@ public class StatisticService
 		List<AdResult> list = service.queryTempStatisticList(AdResult.class, MongoDBConnConfig.DATABASE_STATISTIC, date);
 		if(list != null && list.size() > 0)
 		{
-			MongoService<AdDayStatistic> service1 = new AppMongService<AdDayStatistic>();
-			logger.info("清理{}日统计产生的脏数据...",TimeUtil.getDay(date));
-			service1.daleteDayData(TimeUtil.getDay(date));
-			
 			//首先对应用数据进行map reduce操作
 			MongoService<AppResult> appService = new AppMongService<AppResult>();
 			MongoService<AdResult> adService = new AdMongService<AdResult>();
@@ -308,21 +305,12 @@ public class StatisticService
 		logger.info("{}.设备采集信息完成...",hour);
 	}
 	
-	public static void testName(String hour){
-		analyzeDevice(hour);
-		statistic(hour);
-		writeHourData(hour);
-	}
-	
-	
-	
 	public static void main(String[] args) {
 		long s = System.currentTimeMillis();
 //		analyzeDevice("2014-05-14-18");
 		hourStatisticAndValidate(TimeUtil.getDayLastHour(new Date()));
 //		writeHourData("2014-05-30-07");
 //		dayStatistic(new Date());
-//		testName("2014-05-30-07");
 		System.out.println((System.currentTimeMillis()-s)/1000);
 	}
 }

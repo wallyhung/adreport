@@ -605,7 +605,7 @@ public class AppImeiServiceImpl implements ImeiService{
 		AppImeiServiceImpl impl = new AppImeiServiceImpl();
 		List<String> arrs = impl.writeImeiData();
 		generate(arrs);
-		System.out.println(System.currentTimeMillis() - s);
+		System.out.println((System.currentTimeMillis() - s)/1000);
 	}
 }
 	

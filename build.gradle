@@ -54,13 +54,14 @@ repositories {
 
 dependencies 
 {
-    compile('org.mongodb:mongo-java-driver:2.12.2',
+    compile('org.mongodb:mongo-java-driver:2.11.4',
             'org.mongodb.morphia:morphia:0.107',
-            'mysql:mysql-connector-java:5.1.29',
+            'mysql:mysql-connector-java:5.1.30',
             'commons-dbcp:commons-dbcp:1.4',
             'com.fasterxml.jackson.core:jackson-core:2.3.3',
             'com.fasterxml.jackson.core:jackson-databind:2.3.3',
-            'org.slf4j:slf4j-api:1.7.6',
+            'com.fasterxml.jackson.core:jackson-annotations:2.3.3',
+            'org.slf4j:slf4j-api:1.7.7',
             'org.mongodb.morphia:morphia-logging-slf4j:0.107',
             'ch.qos.logback:logback-core:1.1.2',
             'ch.qos.logback:logback-classic:1.1.2',

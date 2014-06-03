@@ -30,13 +30,21 @@ public class ImeiCache {
 		return cache;
 	}
 	
+	
+	public void clear()
+	{
+		imeiCache.clear();
+		dayImeiCache.clear();
+		eightExcludeTodayCache.clear();
+	}
+	
 	public void clearCache()
 	{
 		imeiCache.clear();
+		dayImeiCache.clear();
 		eightExcludeTodayCache.clear();
 		todayAppCache.clear();
 		todayAdCache.clear();
-		dayImeiCache.clear();
 	}
 	
 	public DBObject getImeiInfo(String imei,String hour)

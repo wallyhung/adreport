@@ -12,6 +12,7 @@ import com.jukuad.statistic.log.SoftFeedback;
 import com.jukuad.statistic.util.Constant;
 import com.jukuad.statistic.util.FileParser;
 import com.jukuad.statistic.util.LogFileParser;
+import com.jukuad.statistic.util.Parser;
 
 public class SecondLogAnalysisService 
 {
@@ -166,5 +167,15 @@ public class SecondLogAnalysisService
 			} catch (InterruptedException e) {
 			}
 		}
+	}
+	
+	public static void analyzeSingleLog(String hour)
+	{
+		Parser.insertBatch(1, getLogPath(Constant.PATH_REQUEST, hour));
+		Parser.insertBatch(2, getLogPath(Constant.PATH_PUSH, hour));
+		Parser.insertBatch(3, getLogPath(Constant.PATH_VIEW, hour));
+		Parser.insertBatch(4, getLogPath(Constant.PATH_CLICK, hour));
+		Parser.insertBatch(5, getLogPath(Constant.PATH_DOWNLOAD, hour));
+		Parser.insertBatch(6, getLogPath(Constant.PATH_INSTALL, hour));
 	}
 }
