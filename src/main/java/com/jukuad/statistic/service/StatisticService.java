@@ -305,12 +305,20 @@ public class StatisticService
 		logger.info("{}.设备采集信息完成...",hour);
 	}
 	
+	public static void hourStatistic(String hour)
+	{
+		analyzeDevice(hour);
+		statistic(hour);
+		writeHourData(hour);
+	}
+	
 	public static void main(String[] args) {
 		long s = System.currentTimeMillis();
 //		analyzeDevice("2014-05-14-18");
-		hourStatisticAndValidate(TimeUtil.getDayLastHour(new Date()));
+//		hourStatisticAndValidate(TimeUtil.getDayLastHour(new Date()));
 //		writeHourData("2014-05-30-07");
 //		dayStatistic(new Date());
+		hourStatistic("2014-06-04-10");
 		System.out.println((System.currentTimeMillis()-s)/1000);
 	}
 }
