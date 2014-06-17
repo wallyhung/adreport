@@ -16,6 +16,7 @@ public class AdFeedback extends BaseEntity implements Serializable{
     private String   adid;
     private int      type;  //广告类型（cpa,cpm）
     private String   appid;
+    private int 	 reissue;//补推广告标示
 
     public String getSlot_name() {
         return slot_name;
@@ -55,6 +56,14 @@ public class AdFeedback extends BaseEntity implements Serializable{
 
 	public void setAppid(String appid) {
 		this.appid = appid;
+	}
+
+	public int getReissue() {
+		return reissue;
+	}
+
+	public void setReissue(int reissue) {
+		this.reissue = reissue;
 	}
 	
     

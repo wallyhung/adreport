@@ -318,7 +318,7 @@ public class StatisticService
 //		hourStatisticAndValidate(TimeUtil.getDayLastHour(new Date()));
 //		writeHourData("2014-05-30-07");
 //		dayStatistic(new Date());
-		hourStatistic("2014-06-04-10");
+		hourStatistic("2014-06-10-10");
 		System.out.println((System.currentTimeMillis()-s)/1000);
 	}
 }
